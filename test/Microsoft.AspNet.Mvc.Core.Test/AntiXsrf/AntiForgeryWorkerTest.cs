@@ -36,7 +36,7 @@ namespace Microsoft.AspNet.Mvc.Core.Test
                 tokenStore: null,
                 generator: null,
                 validator: null,
-                htmlEncoder: null);
+                htmlEncoder: new HtmlEncoder());
 
             // Act & assert
             var ex =
@@ -68,7 +68,7 @@ namespace Microsoft.AspNet.Mvc.Core.Test
                 tokenStore: null,
                 generator: null,
                 validator: null,
-                htmlEncoder: null);
+                htmlEncoder: new HtmlEncoder());
 
             // Act & assert
             var ex = Assert.Throws<InvalidOperationException>(
@@ -98,7 +98,7 @@ namespace Microsoft.AspNet.Mvc.Core.Test
                 tokenStore: null,
                 generator: null,
                 validator: null,
-                htmlEncoder: null);
+                htmlEncoder: new HtmlEncoder());
 
             // Act & assert
             var ex = Assert.Throws<InvalidOperationException>(() => worker.GetFormInputElement(mockHttpContext.Object));
@@ -127,7 +127,7 @@ namespace Microsoft.AspNet.Mvc.Core.Test
                 tokenStore: null,
                 generator: null,
                 validator: null,
-                htmlEncoder: null);
+                htmlEncoder: new HtmlEncoder());
 
             // Act & assert
             var ex = Assert.Throws<InvalidOperationException>(() => worker.GetTokens(mockHttpContext.Object, "cookie-token"));

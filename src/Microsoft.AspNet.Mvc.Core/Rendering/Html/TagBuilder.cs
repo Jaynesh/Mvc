@@ -16,6 +16,10 @@ namespace Microsoft.AspNet.Mvc.Rendering
         private string _innerHtml;
         private IHtmlEncoder _htmlEncoder;
 
+        public TagBuilder(string tagName) : this(tagName, HtmlEncoder.Default)
+        {
+        }
+
         public TagBuilder(string tagName, IHtmlEncoder htmlEncoder)
         {
             if (string.IsNullOrEmpty(tagName))

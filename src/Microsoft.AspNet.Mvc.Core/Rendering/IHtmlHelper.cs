@@ -46,10 +46,19 @@ namespace Microsoft.AspNet.Mvc.Rendering
         /// </summary>
         ViewDataDictionary ViewData { get; }
 
+        /// <summary>
+        /// Gets the <see cref="IHtmlEncoder"/> to be used for encoding Html.
+        /// </summary>
         IHtmlEncoder HtmlEncoder { get; }
 
+        /// <summary>
+        /// Gets the <see cref="IUrlEncoder"/> to be used for encoding Url.
+        /// </summary>
         IUrlEncoder UrlEncoder { get; }
 
+        /// <summary>
+        /// Gets the <see cref="IJavaScriptStringEncoder"/> to be used for encoding Javascript string.
+        /// </summary>
         IJavaScriptStringEncoder JavaScriptStringEncoder { get; }
 
         /// <summary>

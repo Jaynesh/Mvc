@@ -363,7 +363,7 @@ namespace Microsoft.AspNet.Mvc.Razor
         public async Task RenderAsync_ExecutesLayoutPages()
         {
             // Arrange
-            var expected = @"layout-content&#xD;&#xA;head-content&#xD;&#xA;body-content&#xD;&#xA;foot-content";
+            var expected = "layout-content&#xD;&#xA;head-content&#xD;&#xA;body-content&#xD;&#xA;foot-content";
 
             var page = new TestableRazorPage(v =>
             {

@@ -26,12 +26,12 @@ namespace Microsoft.AspNet.Mvc.Rendering
 
             return htmlHelper.ViewData.ModelMetadata.IsNullableValueType ?
                 BooleanTemplateDropDownList(htmlHelper, value) :
-                BooleanTemplateCheckbox(value ?? false, htmlHelper.HtmlEncoder);
+                BooleanTemplateCheckbox(value ?? false, htmlHelper);
         }
 
-        private static string BooleanTemplateCheckbox(bool value, IHtmlEncoder htmlEncoder)
+        private static string BooleanTemplateCheckbox(bool value, IHtmlHelper htmlHelper)
         {
-            var inputTag = new TagBuilder("input", htmlEncoder);
+            var inputTag = new TagBuilder("input", htmlHelper.HtmlEncoder);
             inputTag.AddCssClass("check-box");
             inputTag.Attributes["disabled"] = "disabled";
             inputTag.Attributes["type"] = "checkbox";
@@ -294,13 +294,13 @@ namespace Microsoft.AspNet.Mvc.Rendering
                 string.Empty :
                 htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
 
-            return HyperlinkTemplate(uriString, linkedText, htmlHelper.HtmlEncoder);
+            return HyperlinkTemplate(uriString, linkedText, htmlHelper);
         }
 
         // Neither uriString nor linkedText need be encoded prior to calling this method.
-        private static string HyperlinkTemplate(string uriString, string linkedText, IHtmlEncoder htmlEncoder)
+        private static string HyperlinkTemplate(string uriString, string linkedText, IHtmlHelper htmlHelper)
         {
-            var hyperlinkTag = new TagBuilder("a", htmlEncoder);
+            var hyperlinkTag = new TagBuilder("a", htmlHelper.HtmlEncoder);
             hyperlinkTag.MergeAttribute("href", uriString);
             hyperlinkTag.SetInnerText(linkedText);
 

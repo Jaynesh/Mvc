@@ -267,7 +267,7 @@ namespace Microsoft.AspNet.Mvc.Razor
         {
             if (!string.IsNullOrEmpty(value))
             {
-                writer.Write(HtmlEncoder.HtmlEncode(value));
+                HtmlEncoder.HtmlEncode(value, writer);
             }
         }
 

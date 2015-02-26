@@ -113,10 +113,13 @@ namespace Microsoft.AspNet.Mvc.Rendering
             }
         }
 
+        /// <inheritdoc />
         public IHtmlEncoder HtmlEncoder { get; }
 
+        /// <inheritdoc />
         public IUrlEncoder UrlEncoder { get; }
 
+        /// <inheritdoc />
         public IJavaScriptStringEncoder JavaScriptStringEncoder { get; }
 
         /// <inheritdoc />
