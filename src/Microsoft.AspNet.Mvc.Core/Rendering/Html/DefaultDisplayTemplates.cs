@@ -5,12 +5,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 using Microsoft.AspNet.Mvc.Core;
 using Microsoft.AspNet.Mvc.ModelBinding;
 using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.WebEncoders;
 
 namespace Microsoft.AspNet.Mvc.Rendering
 {
@@ -182,7 +180,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
                 string.Empty :
                 htmlHelper.ViewData.TemplateInfo.FormattedModelValue.ToString();
 
-            return HyperlinkTemplate(uriString, linkedText, htmlHelper.HtmlEncoder);
+            return HyperlinkTemplate(uriString, linkedText, htmlHelper);
         }
 
         public static string HiddenInputTemplate(IHtmlHelper htmlHelper)

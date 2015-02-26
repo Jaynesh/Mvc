@@ -123,7 +123,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
         public IJavaScriptStringEncoder JavaScriptStringEncoder { get; }
 
         /// <inheritdoc />
-        public IModelMetadataProvider MetadataProvider { get; private set; }
+        public IModelMetadataProvider MetadataProvider { get; }
 
         /// <summary>
         /// Creates a dictionary from an object, by adding each public instance property as a key with its associated

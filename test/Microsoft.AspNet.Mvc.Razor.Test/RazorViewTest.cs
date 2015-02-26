@@ -167,19 +167,20 @@ namespace Microsoft.AspNet.Mvc.Razor
         public async Task RenderAsync_AsPartial_ExecutesLayout_ButNotViewStartPages()
         {
             // Arrange
-            var expected = string.Join("&#xD;&#xA;",
+            var htmlEncoder = new HtmlEncoder();
+            var expected = string.Join(htmlEncoder.HtmlEncode(Environment.NewLine),
                                        "layout-content",
                                        "page-content");
             var page = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.Layout = LayoutPath;
                 v.Write("page-content");
             });
 
             var layout = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.Write("layout-content" + Environment.NewLine);
                 v.RenderBodyPublic();
             });
@@ -363,11 +364,18 @@ namespace Microsoft.AspNet.Mvc.Razor
         public async Task RenderAsync_ExecutesLayoutPages()
         {
             // Arrange
-            var expected = "layout-content&#xD;&#xA;head-content&#xD;&#xA;body-content&#xD;&#xA;foot-content";
+            var htmlEncoder = new HtmlEncoder();
+            var expected = "layout-content" +
+                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           "head-content" +
+                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           "body-content" +
+                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           "foot-content";
 
             var page = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.WriteLiteral("body-content");
                 v.Layout = LayoutPath;
                 v.DefineSection("head", async writer =>
@@ -381,7 +389,7 @@ namespace Microsoft.AspNet.Mvc.Razor
             });
             var layout = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.Write("layout-content" + Environment.NewLine);
                 v.Write(v.RenderSection("head"));
                 v.Write(Environment.NewLine);
@@ -477,14 +485,20 @@ namespace Microsoft.AspNet.Mvc.Razor
         public async Task RenderAsync_ExecutesNestedLayoutPages()
         {
             // Arrange
-            var expected =
-@"layout-2&#xD;&#xA;bar-content
-layout-1&#xD;&#xA;foo-content
-body-content";
+            var htmlEncoder = new HtmlEncoder();
+            var expected = "layout-2" +
+                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           "bar-content" +
+                           Environment.NewLine +
+                           "layout-1" +
+                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           "foo-content" +
+                           Environment.NewLine +
+                           "body-content";
 
             var page = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.DefineSection("foo", async writer =>
                 {
                     await writer.WriteLineAsync("foo-content");
@@ -494,7 +508,7 @@ body-content";
             });
             var layout1 = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.Write("layout-1" + Environment.NewLine);
                 v.Write(v.RenderSection("foo"));
                 v.DefineSection("bar", writer => writer.WriteLineAsync("bar-content"));
@@ -503,7 +517,7 @@ body-content";
             });
             var layout2 = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.Write("layout-2" + Environment.NewLine);
                 v.Write(v.RenderSection("bar"));
                 v.RenderBodyPublic();
@@ -532,14 +546,18 @@ body-content";
         public async Task RenderAsync_DoesNotCopyContentOnceRazorTextWriterIsNoLongerBuffering()
         {
             // Arrange
-            var expected =
-@"layout-1&#xD;&#xA;body content
-section-content-1
-section-content-2";
+            var htmlEncoder = new HtmlEncoder();
+            var expected = "layout-1" +
+                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           "body content" +
+                           Environment.NewLine +
+                           "section-content-1" +
+                           Environment.NewLine +
+                           "section-content-2";
 
             var page = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.Layout = "layout-1";
                 v.WriteLiteral("body content" + Environment.NewLine);
                 v.DefineSection("foo", async _ =>
@@ -552,7 +570,7 @@ section-content-2";
 
             var layout1 = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.Write("layout-1" + Environment.NewLine);
                 v.RenderBodyPublic();
                 v.Write(v.RenderSection("foo"));
@@ -580,13 +598,16 @@ section-content-2";
         public async Task FlushAsync_DoesNotThrowWhenInvokedInsideOfASection()
         {
             // Arrange
-            var expected = 
-@"layout-1&#xD;&#xA;section-content-1
-section-content-2";
+            var htmlEncoder = new HtmlEncoder();
+            var expected = "layout-1" +
+                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           "section-content-1" +
+                           Environment.NewLine +
+                           "section-content-2";
 
             var page = new TestableRazorPage(v =>
            {
-               v.HtmlEncoder = new HtmlEncoder();
+               v.HtmlEncoder = htmlEncoder;
                v.Layout = "layout-1";
                v.DefineSection("foo", async _ =>
                {
@@ -598,7 +619,7 @@ section-content-2";
 
             var layout1 = new TestableRazorPage(v =>
             {
-                v.HtmlEncoder = new HtmlEncoder();
+                v.HtmlEncoder = htmlEncoder;
                 v.Write("layout-1" + Environment.NewLine);
                 v.RenderBodyPublic();
                 v.Write(v.RenderSection("foo"));

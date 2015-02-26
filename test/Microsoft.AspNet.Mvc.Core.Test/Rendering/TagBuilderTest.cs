@@ -70,6 +70,7 @@ namespace Microsoft.AspNet.Mvc.Core.Rendering
             Assert.Equal(new KeyValuePair<string, string>("ID", "something"), attribute);
         }
 
+        [Theory]
         [MemberData(nameof(RenderingTestingData))]
         public void ToString_IgnoresIdAttributeCase(TagRenderMode renderingMode, string expectedOutput)
         {
@@ -86,6 +87,7 @@ namespace Microsoft.AspNet.Mvc.Core.Rendering
             Assert.Equal(expectedOutput, value);
         }
 
+        [Theory]
         [MemberData(nameof(RenderingTestingData))]
         public void ToHtmlString_IgnoresIdAttributeCase(TagRenderMode renderingMode, string expectedOutput)
         {
