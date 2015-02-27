@@ -133,6 +133,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
         // Internal for ease of use when testing.
         protected internal GlobbingUrlBuilder GlobbingUrlBuilder { get; set; }
 
+        [Activate]
         protected internal IHtmlEncoder HtmlEncoder { get; set; }
 
         /// <inheritdoc />

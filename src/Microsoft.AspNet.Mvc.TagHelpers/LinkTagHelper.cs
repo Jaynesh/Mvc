@@ -2,7 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -209,7 +208,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
 
             foreach (var url in urls)
             {
-                attributes["href"] = WebUtility.HtmlEncode(url);
+                attributes["href"] = HtmlEncoder.HtmlEncode(url);
                 BuildLinkTag(attributes, builder);
             }
         }

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.AspNet.FileProviders;
 using Microsoft.AspNet.Mvc.Razor.Directives;
 using Microsoft.AspNet.Razor;
 using Microsoft.AspNet.Razor.Generator;
@@ -100,7 +101,7 @@ namespace Microsoft.AspNet.Mvc.Razor
                     StartWritingScopeMethodName = "StartWritingScope",
                     EndWritingScopeMethodName = "EndWritingScope",
 
-                    HtmlEncoderPropertyName = "HtmlEncoder",
+                    HtmlEncoderPropertyName = "Html.HtmlEncoder",
                 })
             {
                 ResolveUrlMethodName = "Href",

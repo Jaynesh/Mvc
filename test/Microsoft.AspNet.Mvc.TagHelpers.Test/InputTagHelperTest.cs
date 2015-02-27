@@ -104,7 +104,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             {
                 { "class", "form-control" },
             };
-            var output = new TagHelperOutput(expectedTagName, originalAttributes)
+            var output = new TagHelperOutput(expectedTagName, originalAttributes, new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -160,7 +160,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             {
                 { "class", "form-control" },
             };
-            var output = new TagHelperOutput(originalTagName, originalAttributes)
+            var output = new TagHelperOutput(originalTagName, originalAttributes, new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = originalContent,
@@ -251,7 +251,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             {
                 { "class", "form-control" },
             };
-            var output = new TagHelperOutput(expectedTagName, originalAttributes)
+            var output = new TagHelperOutput(expectedTagName, originalAttributes, new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -339,7 +339,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             {
                 { "class", "form-control" },
             };
-            var output = new TagHelperOutput(expectedTagName, originalAttributes)
+            var output = new TagHelperOutput(expectedTagName, originalAttributes, new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -424,7 +424,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             {
                 { "class", "form-control" },
             };
-            var output = new TagHelperOutput(expectedTagName, originalAttributes)
+            var output = new TagHelperOutput(expectedTagName, originalAttributes, new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -524,7 +524,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             {
                 { "class", "form-control" },
             };
-            var output = new TagHelperOutput(expectedTagName, originalAttributes)
+            var output = new TagHelperOutput(expectedTagName, originalAttributes, new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -589,7 +589,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 items: new Dictionary<object, object>(),
                 uniqueId: "test",
                 getChildContentAsync: () => Task.FromResult("Something"));
-            var output = new TagHelperOutput(expectedTagName, expectedAttributes)
+            var output = new TagHelperOutput(expectedTagName, expectedAttributes, new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -645,7 +645,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 items: new Dictionary<object, object>(),
                 uniqueId: "test",
                 getChildContentAsync: () => Task.FromResult("Something"));
-            var output = new TagHelperOutput(expectedTagName, originalAttributes);
+            var output = new TagHelperOutput(expectedTagName, originalAttributes, new HtmlEncoder());
             var tagHelper = new InputTagHelper
             {
                 Format = "{0}",

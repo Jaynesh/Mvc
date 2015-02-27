@@ -352,7 +352,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
         {
             attributes = attributes ?? new Dictionary<string, string>();
 
-            return new TagHelperOutput(tagName, attributes);
+            return new TagHelperOutput(tagName, attributes, new HtmlEncoder());
         }
 
         private static IHostingEnvironment MakeHostingEnvironment()

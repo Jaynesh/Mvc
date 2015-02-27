@@ -390,7 +390,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 Logger = logger.Object,
                 HostingEnvironment = hostingEnvironment,
                 ViewContext = viewContext,
-                SrcInclude = "**/*.js"
+                SrcInclude = "**/*.js",
+                HtmlEncoder = new HtmlEncoder()
             };
 
             // Act
@@ -427,7 +428,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
         {
             attributes = attributes ?? new Dictionary<string, string>();
 
-            return new TagHelperOutput(tagName, attributes);
+            return new TagHelperOutput(tagName, attributes, new HtmlEncoder());
         }
 
         private TagHelperLogger<ScriptTagHelper> CreateLogger()

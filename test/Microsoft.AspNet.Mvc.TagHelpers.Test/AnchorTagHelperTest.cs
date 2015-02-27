@@ -42,7 +42,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 {
                     { "id", "myanchor" },
                     { "asp-route-foo", "bar" },
-                })
+                },
+                htmlEncoder: new HtmlEncoder())
             {
                 Content = "Something"
             };
@@ -89,7 +90,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 getChildContentAsync: () => Task.FromResult("Something"));
             var output = new TagHelperOutput(
                 "a",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 Content = string.Empty
             };
@@ -128,7 +130,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 getChildContentAsync: () => Task.FromResult("Something"));
             var output = new TagHelperOutput(
                 "a",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 Content = string.Empty
             };
@@ -174,7 +177,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 attributes: new Dictionary<string, string>()
                 {
                     { "href", "http://www.contoso.com" }
-                });
+                },
+                htmlEncoder: new HtmlEncoder());
             if (propertyName == "asp-route-")
             {
                 output.Attributes.Add("asp-route-foo", "bar");
@@ -209,7 +213,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             typeof(AnchorTagHelper).GetProperty(propertyName).SetValue(anchorTagHelper, "Home");
             var output = new TagHelperOutput(
                 "a",
-                attributes: new Dictionary<string, string>());
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder());
             var expectedErrorMessage = "Cannot determine an 'href' attribute for <a>. An <a> with a specified " +
                 "'asp-route' must not have an 'asp-action' or 'asp-controller' attribute.";
 

@@ -47,7 +47,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 attributes: new Dictionary<string, string>
                 {
                     { "id", "myvalidationmessage" }
-                })
+                },
+                htmlEncoder: new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -97,7 +98,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 getChildContentAsync: () => Task.FromResult("Something"));
             var output = new TagHelperOutput(
                 "span",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -138,7 +140,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             };
             var output = new TagHelperOutput(
                 "span",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 Content = outputContent
             };
@@ -194,7 +197,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             };
             var output = new TagHelperOutput(
                 "span",
-                attributes: new Dictionary<string, string>());
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder());
 
             var context = new TagHelperContext(
                 allAttributes: new Dictionary<string, object>(),
@@ -244,7 +248,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             var expectedPostContent = "original post-content";
             var output = new TagHelperOutput(
                 "span",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,

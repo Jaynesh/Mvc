@@ -53,7 +53,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 attributes: new Dictionary<string, string>
                 {
                     { "class", "form-control" }
-                })
+                },
+                htmlEncoder: new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -99,7 +100,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             var expectedPostContent = "original post-content";
             var output = new TagHelperOutput(
                 "div",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -142,7 +144,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             var expectedContent = "original content";
             var output = new TagHelperOutput(
                 "div",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -200,7 +203,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             var expectedPostContent = "original post-content";
             var output = new TagHelperOutput(
                 "div",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
@@ -237,7 +241,8 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             var expectedContent = "original content";
             var output = new TagHelperOutput(
                 "div",
-                attributes: new Dictionary<string, string>())
+                attributes: new Dictionary<string, string>(),
+                htmlEncoder: new HtmlEncoder())
             {
                 PreContent = expectedPreContent,
                 Content = expectedContent,
