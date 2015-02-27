@@ -61,6 +61,9 @@ namespace Microsoft.AspNet.Mvc.Razor
         /// <inheritdoc />
         public bool IsPartial { get; set; }
 
+        /// <summary>
+        /// Gets the <see cref="IHtmlEncoder"/> to be used for encoding HTML.
+        /// </summary>
         [Activate]
         public IHtmlEncoder HtmlEncoder { get; set; }
 

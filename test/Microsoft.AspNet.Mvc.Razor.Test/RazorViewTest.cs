@@ -697,7 +697,7 @@ namespace Microsoft.AspNet.Mvc.Razor
             var layoutPath = "~/Shared/Layout1.cshtml";
             viewEngine.Setup(p => p.FindPage(It.IsAny<ActionContext>(), layoutPath))
                        .Returns(new RazorPageResult(layoutPath, layoutPage));
-            
+
             var view = new RazorView(viewEngine.Object,
                                      Mock.Of<IRazorPageActivator>(),
                                      CreateViewStartProvider(),

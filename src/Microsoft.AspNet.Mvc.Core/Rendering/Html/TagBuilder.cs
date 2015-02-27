@@ -114,7 +114,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
             }
         }
 
-        private void AppendAttributes(TextWriter tw)
+        private void AppendAttributes(TextWriter textWriter)
         {
             foreach (var attribute in Attributes)
             {
@@ -125,9 +125,9 @@ namespace Microsoft.AspNet.Mvc.Rendering
                     continue;
                 }
 
-                tw.Write(' ' + key + "=\"");
-                _htmlEncoder.HtmlEncode(attribute.Value, tw);
-                tw.Write('"');
+                textWriter.Write(' ' + key + "=\"");
+                _htmlEncoder.HtmlEncode(attribute.Value, textWriter);
+                textWriter.Write('"');
             }
         }
 
@@ -184,40 +184,40 @@ namespace Microsoft.AspNet.Mvc.Rendering
 
         public string ToString(TagRenderMode renderMode)
         {
-            using (var sw = new StringWriter())
+            using (var stringWriter = new StringWriter())
             {
                 switch (renderMode)
                 {
                     case TagRenderMode.StartTag:
-                        sw.Write('<');
-                        sw.Write(TagName);
-                        AppendAttributes(sw);
-                        sw.Write('>');
+                        stringWriter.Write('<');
+                        stringWriter.Write(TagName);
+                        AppendAttributes(stringWriter);
+                        stringWriter.Write('>');
                         break;
                     case TagRenderMode.EndTag:
-                        sw.Write("</");
-                        sw.Write(TagName);
-                        sw.Write('>');
+                        stringWriter.Write("</");
+                        stringWriter.Write(TagName);
+                        stringWriter.Write('>');
                         break;
                     case TagRenderMode.SelfClosing:
-                        sw.Write('<');
-                        sw.Write(TagName);
-                        AppendAttributes(sw);
-                        sw.Write(" />");
+                        stringWriter.Write('<');
+                        stringWriter.Write(TagName);
+                        AppendAttributes(stringWriter);
+                        stringWriter.Write(" />");
                         break;
                     default:
-                        sw.Write('<');
-                        sw.Write(TagName);
-                        AppendAttributes(sw);
-                        sw.Write('>');
-                        sw.Write(InnerHtml);
-                        sw.Write("</");
-                        sw.Write(TagName);
-                        sw.Write('>');
+                        stringWriter.Write('<');
+                        stringWriter.Write(TagName);
+                        AppendAttributes(stringWriter);
+                        stringWriter.Write('>');
+                        stringWriter.Write(InnerHtml);
+                        stringWriter.Write("</");
+                        stringWriter.Write(TagName);
+                        stringWriter.Write('>');
                         break;
                 }
 
-                return sw.ToString();
+                return stringWriter.ToString();
             }
         }
 
