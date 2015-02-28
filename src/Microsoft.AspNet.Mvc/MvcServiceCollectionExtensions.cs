@@ -26,7 +26,6 @@ namespace Microsoft.Framework.DependencyInjection
         {
             ConfigureDefaultServices(services, configuration);
             services.TryAdd(MvcServices.GetDefaultServices(configuration));
-            services.AddEncoders(configuration);
             return services;
         }
 
@@ -135,6 +134,7 @@ namespace Microsoft.Framework.DependencyInjection
             services.AddDataProtection(configuration);
             services.AddRouting(configuration);
             services.AddAuthorization(configuration);
+            services.AddEncoders(configuration);
             services.Configure<RouteOptions>(routeOptions =>
                                                     routeOptions.ConstraintMap
                                                          .Add("exists",

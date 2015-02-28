@@ -365,12 +365,13 @@ namespace Microsoft.AspNet.Mvc.Razor
         {
             // Arrange
             var htmlEncoder = new HtmlEncoder();
+            var htmlEncodedNewLine = htmlEncoder.HtmlEncode(Environment.NewLine);
             var expected = "layout-content" +
-                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           htmlEncodedNewLine +
                            "head-content" +
-                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           htmlEncodedNewLine +
                            "body-content" +
-                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           htmlEncodedNewLine +
                            "foot-content";
 
             var page = new TestableRazorPage(v =>
@@ -486,12 +487,13 @@ namespace Microsoft.AspNet.Mvc.Razor
         {
             // Arrange
             var htmlEncoder = new HtmlEncoder();
+            var htmlEncodedNewLine = htmlEncoder.HtmlEncode(Environment.NewLine);
             var expected = "layout-2" +
-                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           htmlEncodedNewLine +
                            "bar-content" +
                            Environment.NewLine +
                            "layout-1" +
-                           htmlEncoder.HtmlEncode(Environment.NewLine) +
+                           htmlEncodedNewLine +
                            "foo-content" +
                            Environment.NewLine +
                            "body-content";

@@ -100,8 +100,7 @@ namespace Microsoft.AspNet.Mvc.Razor
                     CreateTagHelperMethodName = "CreateTagHelper",
                     StartWritingScopeMethodName = "StartWritingScope",
                     EndWritingScopeMethodName = "EndWritingScope",
-
-                    HtmlEncoderPropertyName = "Html.HtmlEncoder",
+                    HtmlEncoderPropertyName = "HtmlEncoder",
                 })
             {
                 ResolveUrlMethodName = "Href",

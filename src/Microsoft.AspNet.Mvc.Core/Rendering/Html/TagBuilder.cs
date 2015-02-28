@@ -15,7 +15,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
     public class TagBuilder
     {
         private string _innerHtml;
-        private IHtmlEncoder _htmlEncoder;
+        private readonly IHtmlEncoder _htmlEncoder;
 
         public TagBuilder(string tagName)
             : this(tagName, HtmlEncoder.Default)
@@ -125,7 +125,9 @@ namespace Microsoft.AspNet.Mvc.Rendering
                     continue;
                 }
 
-                textWriter.Write(' ' + key + "=\"");
+                textWriter.Write(' ');
+                textWriter.Write(key);
+                textWriter.Write("=\"");
                 _htmlEncoder.HtmlEncode(attribute.Value, textWriter);
                 textWriter.Write('"');
             }

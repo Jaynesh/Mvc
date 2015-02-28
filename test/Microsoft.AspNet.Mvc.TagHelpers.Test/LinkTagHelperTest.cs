@@ -325,6 +325,46 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                          "<link href=\"/base.css\" rel=\"stylesheet\" />", output.Content);
         }
 
+        [Fact]
+        public void RendersLinkTagsForGlobbedHrefResults_UsingProvidedEncoder()
+        {
+            // Arrange
+            var context = MakeTagHelperContext(
+                attributes: new Dictionary<string, object>
+                {
+                    ["href"] = "/css/site.css",
+                    ["rel"] = "stylesheet",
+                    ["asp-href-include"] = "**/*.css"
+                });
+            var output = MakeTagHelperOutput("link", attributes: new Dictionary<string, string>
+            {
+                ["href"] = "/css/site.css",
+                ["rel"] = "stylesheet"
+            });
+            var logger = new Mock<ILogger<LinkTagHelper>>();
+            var hostingEnvironment = MakeHostingEnvironment();
+            var viewContext = MakeViewContext();
+            var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>();
+            globbingUrlBuilder.Setup(g => g.BuildUrlList("/css/site.css", "**/*.css", null))
+                .Returns(new[] { "/css/site.css", "/base.css" });
+            var helper = new LinkTagHelper
+            {
+                HtmlEncoder = new TestHtmlEncoder(),
+                GlobbingUrlBuilder = globbingUrlBuilder.Object,
+                Logger = logger.Object,
+                HostingEnvironment = hostingEnvironment,
+                ViewContext = viewContext,
+                HrefInclude = "**/*.css"
+            };
+
+            // Act
+            helper.Process(context, output);
+
+            // Assert
+            Assert.Equal("<link href=\"HtmlEncode[[/css/site.css]]\" rel=\"stylesheet\" />" +
+                         "<link href=\"HtmlEncode[[/base.css]]\" rel=\"stylesheet\" />", output.Content);
+        }
+
         private static ViewContext MakeViewContext()
         {
             var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
@@ -367,6 +407,28 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             hostingEnvironment.Setup(h => h.WebRootFileProvider).Returns(mockFileProvider.Object);
 
             return hostingEnvironment.Object;
+        }
+
+        private class TestHtmlEncoder : IHtmlEncoder
+        {
+            public string HtmlEncode(string value)
+            {
+                return "HtmlEncode[[" + value + "]]";
+            }
+
+            public void HtmlEncode(string value, int startIndex, int charCount, TextWriter output)
+            {
+                output.Write("HtmlEncode[[");
+                output.Write(value.Substring(startIndex, charCount));
+                output.Write("]]");
+            }
+
+            public void HtmlEncode(char[] value, int startIndex, int charCount, TextWriter output)
+            {
+                output.Write("HtmlEncode[[");
+                output.Write(value, startIndex, charCount);
+                output.Write("]]");
+            }
         }
     }
 }
